@@ -60,6 +60,28 @@ final class An_Whatever {
 	private string $version;
 
 	/**
+	 * Custom taxonomies registration args.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @var    array $ctx_args Associative array. The key of the array is the CPT name
+	 *                         to which the taxonomy is assigned. The value of the array
+	 *                         is an associative array, where the key is the name of the taxonomy
+	 *                         and the value is an array of taxonomy registration arguments.
+	 */
+	private array $ctx_args;
+
+	/**
+	 * Custom post types registration args.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @var    array $cpt_args The keys of the array are the CPT type
+	 *                         and the values are the array of CPT registration arguments.
+	 */
+	private array $cpt_args;
+
+	/**
 	 * Singleton class instance with collection of helpers methods.
 	 *
 	 * @since  1.0.0
@@ -88,6 +110,9 @@ final class An_Whatever {
 
 		$this->plugin_name   = $this->helpers::get_plugin_name();
 		$this->plugin_prefix = $this->helpers::get_plugin_prefix();
+
+		$this->ctx_args = $this->helpers::get_ctx_args();
+		$this->cpt_args = $this->helpers::get_cpt_args();
 	}
 
 	/**
@@ -145,7 +170,16 @@ final class An_Whatever {
 	 * @since  1.0.0
 	 * @access private
 	 */
-	private function define_admin_hooks() {}
+	private function define_admin_hooks() {
+		/*
+		 * In order to have a taxonomy appear in the URL hierarchy of the relevant CPT,
+		 * you can rewrite the taxonomy slug to contain the CPT’s slug.
+		 * But you must register the CPT after registering the taxonomy,
+		 * otherwise the rewrite will not work.
+		 */
+		\add_action( 'init', array( $this, 'register_custom_taxonomies' ), 0 );
+		\add_action( 'init', array( $this, 'register_custom_post_types' ), 10 );
+	}
 
 	/**
 	 * Register all of the hooks related only to the public-facing functionality
@@ -168,4 +202,50 @@ final class An_Whatever {
 		$this->define_public_hooks();
 	}
 
+
+
+	/**
+	 * All taxonomies are registered and linked to the CPT.
+	 *
+	 * @return void
+	 */
+	public function register_custom_taxonomies(): void {
+		$already_registered_taxonomies = array();
+
+		foreach ( $this->ctx_args as $cpt_type => $ctx_args ) {
+			foreach ( $ctx_args as $ctx_key => $ctx_register_args ) {
+				/*
+				 * If a taxonomy is assigned to multiple CPTs, we do not register
+				 * the taxonomy a second time, but only link it to another CPT
+				 * and start the loop again.
+				 */
+				if ( \in_array( $ctx_key, $already_registered_taxonomies, true ) ) {
+					\register_taxonomy_for_object_type( $ctx_key, $cpt_type );
+					continue;
+				}
+
+				\register_taxonomy( $ctx_key, $cpt_type, $ctx_register_args );
+
+				// @link https://developer.wordpress.org/reference/functions/register_taxonomy/#more-information
+				// Better be safe than sorry when registering custom taxonomies for custom post types.
+				// Use register_taxonomy_for_object_type() right after the function to interconnect them.
+				// Else you could run into minetraps where the post type isn’t attached inside filter callback
+				// that run during parse_request or pre_get_posts.
+				\register_taxonomy_for_object_type( $ctx_key, $cpt_type );
+
+				$already_registered_taxonomies[] = $ctx_key;
+			}
+		}
+	}
+
+	/**
+	 * All CPTs are registered.
+	 *
+	 * @return void
+	 */
+	public function register_custom_post_types(): void {
+		foreach ( $this->cpt_args as $cpt_key => $cpt_register_args ) {
+			\register_post_type( $cpt_key, $cpt_register_args );
+		}
+	}
 }
