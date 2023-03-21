@@ -1,0 +1,24 @@
+{
+	"name": "an-whatever",
+	"version": "1.0.0",
+	"description": "A plugin to show your skills.",
+	"author": "Whatever Forever",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"prettier": "@wordpress/prettier-config",
+	"scripts": {
+		"build": "wp-scripts build --webpack-copy-php --webpack-src-dir=./_src/blocks --output-path=./blocks",
+		"start": "wp-scripts start --webpack-copy-php --webpack-src-dir=./_src/blocks --output-path=./blocks",
+		"start:hot": "wp-scripts start --hot --webpack-copy-php --webpack-src-dir=./_src/blocks --output-path=./blocks",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^26.0.0"
+	}
+}

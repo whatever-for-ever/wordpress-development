@@ -32,6 +32,11 @@
 !/wp-content/plugins/
 /wp-content/plugins/*
 
+# Specific exceptions are listed in the plugins's '.gitignore' file.
+!/wp-content/plugins/an-whatever/
+/wp-content/plugins/an-whatever/*
+
+
 !/wp-content/themes/
 /wp-content/themes/*
 
