@@ -52,6 +52,12 @@ function Edit(props) {
   const {
     accordionID
   } = attributes;
+
+  // If the useEffect method is not used, sometimes there is a warning message in the console:
+  // 'Cannot update a component while rendering a different component warning'.
+  // @link https://github.com/WordPress/gutenberg/issues/21049
+  // @link https://stackoverflow.com/questions/62336340/cannot-update-a-component-while-rendering-a-different-component-warning/63424831#63424831
+  // TODO: find solution without useEffect or find documentation about requiring useEffect in this situation.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setAttributes({
       accordionID: clientId

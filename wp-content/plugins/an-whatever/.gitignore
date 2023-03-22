@@ -54,10 +54,12 @@ vendor/**/*
 
 !/_src/blocks/accordion
 !/_src/blocks/accordion-item
+!/_src/blocks/post-picker
 
 !/blocks/
 /blocks/*
 
 !/blocks/accordion
 !/blocks/accordion-item
+!/blocks/post-picker
 

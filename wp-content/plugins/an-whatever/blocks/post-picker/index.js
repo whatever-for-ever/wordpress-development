@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./_src/blocks/accordion-item/edit.js":
-/*!********************************************!*\
-  !*** ./_src/blocks/accordion-item/edit.js ***!
-  \********************************************/
+/***/ "./_src/blocks/post-picker/edit.js":
+/*!*****************************************!*\
+  !*** ./_src/blocks/post-picker/edit.js ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -14,20 +14,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./_src/blocks/post-picker/editor.scss");
 
 /**
- * WordPress dependencies.
+ * WordPress dependencies
  *
- * @see https://developer.wordpress.org/block-editor/packages/packages-components/
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
+ * Retrieves the translation of text.
+ * * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+ *
+ * React hook that is used to mark the block wrapper element.
+ * It provides all the necessary props like the class name.
+ * * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
+ *
+ * Resolves the specified entity records.
+ * * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-core-data/#useentityrecords
+ *
+ * A FormTokenField is a field similar to the tags and categories fields
+ * in the interim editor chrome, or the “to” field in Mail on OS X.
+ * Tokens can be entered by typing them or selecting them from a list of suggested tokens.
+ * * @see https://developer.wordpress.org/block-editor/reference-guides/components/form-token-field/
+ *
+ * Renders a placeholder. Normally used by blocks to render their empty state.
+ * * @see https://github.com/WordPress/gutenberg/tree/trunk/packages/components/src/placeholder
  */
 
 
 
+
+
+
+/**
+ * Internal dependencies
+ *
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * Those files can contain any CSS code that gets applied to the editor.
+ * * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+ // gets applied to the editor.
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -35,93 +66,112 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @param {Object}   props               Properties passed to the function.
- * @param {Object}   props.attributes    Available block attributes.
- * @param {Function} props.setAttributes Function that updates individual attributes.
- *
  * @return {WPElement} Element to render.
  */
-function Edit(props) {
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
-  const {
-    attributes,
+function Edit(_ref) {
+  let {
+    attributes: {
+      postList
+    },
     setAttributes,
     isSelected,
     clientId
-  } = props;
-  const {
-    title,
-    accordionItemID
-  } = attributes;
+  } = _ref;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)(); // because it is not recommended to use it when you have an if block with return.
+
+  const postsRequest = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__.useEntityRecords)('postType', 'an_whatever', {
+    per_page: -1 // TODO: How to do it efficiently if there are 10000 entries? The suggestions should include all entries. By default, only 10 entries are displayed.
+  });
 
   // If the useEffect method is not used, sometimes there is a warning message in the console:
   // 'Cannot update a component while rendering a different component warning'.
   // @link https://github.com/WordPress/gutenberg/issues/21049
   // @link https://stackoverflow.com/questions/62336340/cannot-update-a-component-while-rendering-a-different-component-warning/63424831#63424831
-  // TODO: find solution without useEffect or find documentation about requiring useEffect in this situation.
+  //TODO: find solution how to proper set attribute in this situation.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setAttributes({
-      accordionItemID: clientId
+      postListId: clientId
     });
   }, []);
-  const ALLOWED_BLOCKS = ['core/heading', 'core/paragraph', 'core/buttons', 'core/button', 'core/audio', 'core/cover', 'core/image', 'core/gallery', 'core/file', 'core/embed', 'core/media-text', 'core/list', 'core/list-item', 'core/spacer', 'core/separator', 'core/shortcode', 'core/quote', 'core/preformatted', 'core/code', 'core/html', 'core/group'];
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (isSelected || title) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    type: "button",
-    "aria-expanded": "true",
-    className: "accordion-trigger",
-    "aria-controls": `acc-item-content-${accordionItemID}`,
-    id: `acc-item-btn-${accordionItemID}`
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-    tagName: "span",
-    value: title,
-    allowedFormats: [],
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Accordion item title', 'an-whatever'),
-    onChange: newTitle => setAttributes({
-      title: newTitle
-    })
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: `acc-item-content-${accordionItemID}`,
-    role: "region",
-    "aria-labelledby": `acc-item-btn-${accordionItemID}`,
-    className: "accordion-panel"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
-    templateLock: false,
-    allowedBlocks: ALLOWED_BLOCKS
-  })));
+
+  /*
+   * If we want to create an accordion from a list of selected entries
+   * and there are several PostPicker blocks on the page, we will need
+   * a unique ID for each of them. This is why the block ID is saved.
+   * Using the block ID and the ID of each record, it will be possible
+   * to create unique IDs.
+   */
+
+  if (postsRequest.isResolving || !postsRequest.hasResolved && 'IDLE' === postsRequest.status) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading...', 'an-whatever'));
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, isSelected ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Placeholder, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Posts Picker', 'an-whatever')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FormTokenField, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Posts to display', 'an-whatever'),
+    __experimentalShowHowTo: false,
+    maxSuggestions: 100 // we may not need this.
+    ,
+    value: postsRequest?.records?.filter(item => {
+      return postList?.includes(item.id);
+    }).map(item => {
+      return item.title.rendered + ' | ID: ' + item.id // We add the ID string because the block list of proposals cannot have identical names.
+      ;
+    }),
+
+    suggestions: postsRequest?.records?.map(post => {
+      return post.title.rendered + ' | ID: ' + post.id; // We add the ID string because the block list of proposals cannot have identical names.
+    }),
+
+    onChange: newList => {
+      setAttributes({
+        postList: postsRequest?.records?.filter(item => {
+          return newList.includes(item.title.rendered + ' | ID: ' + item.id // We add the ID string because the block list of proposals cannot have identical names.
+          );
+        }).map(item => {
+          return item.id;
+        })
+      });
+    }
+  })) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("section", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "accordion-item"
+  }, postsRequest?.records?.filter(item => {
+    return postList?.includes(item.id);
+  }).map(item => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+      key: item.id
+    }, item.title.rendered);
+  })))));
 }
 
 /***/ }),
 
-/***/ "./_src/blocks/accordion-item/index.js":
-/*!*********************************************!*\
-  !*** ./_src/blocks/accordion-item/index.js ***!
-  \*********************************************/
+/***/ "./_src/blocks/post-picker/index.js":
+/*!******************************************!*\
+  !*** ./_src/blocks/post-picker/index.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./_src/blocks/accordion-item/style.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./_src/blocks/accordion-item/editor.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./_src/blocks/accordion-item/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./_src/blocks/accordion-item/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./_src/blocks/accordion-item/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./_src/blocks/post-picker/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./_src/blocks/post-picker/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./_src/blocks/post-picker/block.json");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor. All other files
- * get applied to the editor only.
+ * gets applied both to the front of your site and to the editor.
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-
 
 
 /**
@@ -130,81 +180,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /**
  * Every block starts by registering a new block type definition.
  *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
-  /**
-   * Used to construct a preview for the block to be shown in the block inserter.
-   */
-  example: {
-    attributes: {
-      message: 'Accordion Item Block (An Whatever)'
-    }
-  },
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, {
   /**
    * @see ./edit.js
    */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
-  /**
-   * @see ./save.js
-   */
-  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),
 
-/***/ "./_src/blocks/accordion-item/save.js":
-/*!********************************************!*\
-  !*** ./_src/blocks/accordion-item/save.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ save)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-
-
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @param {Object} props            Properties passed to the function.
- * @param {Object} props.attributes Available block attributes.
- * @return {WPElement} Element to render.
- */
-function save(_ref) {
-  let {
-    attributes
-  } = _ref;
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null);
-}
-
-/***/ }),
-
-/***/ "./_src/blocks/accordion-item/editor.scss":
-/*!************************************************!*\
-  !*** ./_src/blocks/accordion-item/editor.scss ***!
-  \************************************************/
+/***/ "./_src/blocks/post-picker/editor.scss":
+/*!*********************************************!*\
+  !*** ./_src/blocks/post-picker/editor.scss ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -213,10 +206,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./_src/blocks/accordion-item/style.scss":
-/*!***********************************************!*\
-  !*** ./_src/blocks/accordion-item/style.scss ***!
-  \***********************************************/
+/***/ "./_src/blocks/post-picker/style.scss":
+/*!********************************************!*\
+  !*** ./_src/blocks/post-picker/style.scss ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -245,6 +238,26 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/core-data":
+/*!**********************************!*\
+  !*** external ["wp","coreData"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["coreData"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -265,13 +278,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./_src/blocks/accordion-item/block.json":
-/*!***********************************************!*\
-  !*** ./_src/blocks/accordion-item/block.json ***!
-  \***********************************************/
+/***/ "./_src/blocks/post-picker/block.json":
+/*!********************************************!*\
+  !*** ./_src/blocks/post-picker/block.json ***!
+  \********************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"an-whatever/accordion-item","version":"1.0.0","title":"Accordion Item (An Whatever)","category":"design","icon":"excerpt-view","description":"Akordiono bloko elementas.","parent":["an-whatever/accordion"],"attributes":{"accordionItemID":{"type":"string","default":""},"title":{"type":"string","default":""}},"supports":{"html":false},"textdomain":"an-whatever","editorScript":"file:./index.js","render":"file:./render.php"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"an-whatever/post-picker","version":"1.0.0","title":"Post Picker","category":"widgets","icon":"color-picker","description":"Post Picker block.","supports":{"html":false},"attributes":{"postListId":{"type":"string","default":""},"postList":{"type":"array"}},"textdomain":"post-picker","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
@@ -385,8 +398,8 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"accordion-item/index": 0,
-/******/ 			"accordion-item/style-index": 0
+/******/ 			"post-picker/index": 0,
+/******/ 			"post-picker/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -436,7 +449,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["accordion-item/style-index"], () => (__webpack_require__("./_src/blocks/accordion-item/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["post-picker/style-index"], () => (__webpack_require__("./_src/blocks/post-picker/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

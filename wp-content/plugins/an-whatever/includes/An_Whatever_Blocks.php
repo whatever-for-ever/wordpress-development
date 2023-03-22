@@ -50,6 +50,9 @@ class An_Whatever_Blocks {
 
 		// @link https://youtu.be/ZjYgdf6RKPU
 		register_block_type( $this->helpers::get_file_path( '/blocks/accordion-item/' ) );
+
+		// @link https://youtu.be/fW3W1eZorHg?t=2561
+		register_block_type( $this->helpers::get_file_path( '/blocks/post-picker/' ) );
 	}
 
 }
