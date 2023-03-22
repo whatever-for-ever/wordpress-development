@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "an-whatever/accordion",
+	"version": "1.0.0",
+	"title": "Accordion",
+	"category": "design",
+	"icon": "feedback",
+	"description": "Accordion block (An Whatever)",
+	"attributes": {
+		"accordionID": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "an-whatever",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"script": "file:./script.js"
+}

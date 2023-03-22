@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "an-whatever/accordion-item",
+  "version": "1.0.0",
+  "title": "Accordion Item (An Whatever)",
+  "category": "design",
+  "icon": "excerpt-view",
+  "description": "Akordiono bloko elementas.",
+  "parent": [
+    "an-whatever/accordion"
+  ],
+  "attributes": {
+    "accordionItemID": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "an-whatever",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

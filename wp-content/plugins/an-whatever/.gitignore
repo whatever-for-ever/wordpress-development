@@ -46,3 +46,18 @@ vendor/**/*
 !/includes/*.php
 !/includes/**/.php
 
+!/_src/
+/_src/*
+
+!/_src/blocks
+/_src/blocks/*
+
+!/_src/blocks/accordion
+!/_src/blocks/accordion-item
+
+!/blocks/
+/blocks/*
+
+!/blocks/accordion
+!/blocks/accordion-item
+

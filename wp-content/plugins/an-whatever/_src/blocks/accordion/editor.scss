@@ -1,0 +1,24 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-an-whatever-accordion {
+	padding: 1rem;
+	background-color: #f0f0f0;
+
+	> .block-editor-inner-blocks {
+		> .block-editor-block-list__layout {
+			padding-bottom: 1rem;
+		}
+	}
+
+	.accordion-panel {
+		> .block-editor-inner-blocks {
+			> .block-editor-block-list__layout {
+				padding-bottom: 1rem;
+			}
+		}
+	}
+}

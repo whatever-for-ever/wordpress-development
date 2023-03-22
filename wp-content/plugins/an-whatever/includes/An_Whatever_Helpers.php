@@ -69,7 +69,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_plugin_name(): string {
 		if ( ! defined( '\An_Whatever\PLUGIN_NAME' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\PLUGIN_NAME constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -91,7 +91,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_plugin_prefix(): string {
 		if ( ! defined( '\An_Whatever\PLUGIN_PREFIX' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\PLUGIN_PREFIX constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -113,7 +113,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_plugin_required_cap(): string {
 		if ( ! defined( '\An_Whatever\REQUIRED_CAP' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\REQUIRED_CAP constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -135,7 +135,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_version(): string {
 		if ( ! defined( '\An_Whatever\PLUGIN_VERSION' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\PLUGIN_VERSION constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -160,7 +160,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_file_path( string $relative_path ): string {
 		if ( ! defined( '\An_Whatever\PLUGIN_PATH' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\PLUGIN_PATH constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -171,7 +171,7 @@ final class An_Whatever_Helpers {
 		$full_path = \An_Whatever\PLUGIN_PATH . \ltrim( $relative_path, \DIRECTORY_SEPARATOR );
 
 		if ( ! \file_exists( $full_path ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				\sprintf(
 					// translators: %s file path string.
 					\__( 'The %s file does not exist.', 'an-whatever' ),
@@ -224,7 +224,7 @@ final class An_Whatever_Helpers {
 	 */
 	public static function get_file_url( string $relative_url ): string {
 		if ( ! defined( '\An_Whatever\PLUGIN_URL' ) ) {
-			maybe_display_error(
+			static::maybe_display_error(
 				__(
 					'The \An_Whatever\PLUGIN_URL constant must be set. Please set the required constant in the an-whatever-constants.php file.',
 					'an-whatever'
@@ -397,7 +397,7 @@ final class An_Whatever_Helpers {
 			throw new \Exception( \esc_html( $error_message ), $error_code );
 		}
 
-		printf(
+		\printf(
 			'<div class="error">%s</div>',
 			esc_html__( 'Error. Please try again later or contact the site administrator.', 'an-whatever' )
 		);

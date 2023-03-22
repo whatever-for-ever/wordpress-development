@@ -137,6 +137,11 @@ final class An_Whatever {
 		 * The class responsible for defining all helper methods and plugin wide variables.
 		 */
 		require_once \An_Whatever\PLUGIN_PATH . 'includes/An_Whatever_Helpers.php';
+
+		/**
+		 * The class responsible for the WordPress Gutenberg Blocks functionality.
+		 */
+		require_once \An_Whatever\PLUGIN_PATH . 'includes/An_Whatever_Blocks.php';
 	}
 
 	/**
@@ -171,14 +176,18 @@ final class An_Whatever {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
+		$plugin_blocks = new \An_Whatever\An_Whatever_Blocks();
+
 		/*
 		 * In order to have a taxonomy appear in the URL hierarchy of the relevant CPT,
 		 * you can rewrite the taxonomy slug to contain the CPT’s slug.
 		 * But you must register the CPT after registering the taxonomy,
 		 * otherwise the rewrite will not work.
 		 */
-		\add_action( 'init', array( $this, 'register_custom_taxonomies' ), 0 );
-		\add_action( 'init', array( $this, 'register_custom_post_types' ), 10 );
+		\add_action( 'init', array( $this, 'action_register_custom_taxonomies' ), 0 );
+		\add_action( 'init', array( $this, 'action_register_custom_post_types' ), 10 );
+
+		\add_action( 'init', array( $plugin_blocks, 'action_register_block_types' ) );
 	}
 
 	/**
@@ -188,7 +197,9 @@ final class An_Whatever {
 	 * @since  1.0.0
 	 * @access private
 	 */
-	private function define_public_hooks() {}
+	private function define_public_hooks() {
+		\add_filter( 'wp_kses_allowed_html', array( $this, 'filter_wp_kses_allowed_html' ), 10, 2 );
+	}
 
 	/**
 	 * Execute all of the hooks with WordPress.
@@ -209,7 +220,7 @@ final class An_Whatever {
 	 *
 	 * @return void
 	 */
-	public function register_custom_taxonomies(): void {
+	public function action_register_custom_taxonomies(): void {
 		$already_registered_taxonomies = array();
 
 		foreach ( $this->ctx_args as $cpt_type => $ctx_args ) {
@@ -243,9 +254,33 @@ final class An_Whatever {
 	 *
 	 * @return void
 	 */
-	public function register_custom_post_types(): void {
+	public function action_register_custom_post_types(): void {
 		foreach ( $this->cpt_args as $cpt_key => $cpt_register_args ) {
 			\register_post_type( $cpt_key, $cpt_register_args );
 		}
 	}
+
+	/**
+	 * Filter `wp_kses_allowed_html` attributes.
+	 *
+	 * Allow `hidden` attribute on div HTML element and `aria-controls` and `aria-expanded` attributes on button HTML element.
+	 * Because `wp_kses_post()` by default removing these attributes.
+	 *
+	 * @param array  $html HTML tags are allowed.
+	 * @param string $context Context name.
+	 *
+	 * @return array
+	 */
+	public function filter_wp_kses_allowed_html( array $html, string $context ): array {
+		if ( ! in_array( $context, array( 'an_whatever', 'post', 'page' ), true ) ) {
+			return $html;
+		}
+
+		$html['button']['aria-controls'] = true;
+		$html['button']['aria-expanded'] = true;
+		$html['div']['hidden']           = true;
+
+		return $html;
+	}
+
 }
