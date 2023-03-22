@@ -269,7 +269,7 @@ final class An_Whatever_Helpers {
 			'publicly_queryable'  => true,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
-			'show_in_nav_menus'   => false,
+			'show_in_nav_menus'   => true,
 		);
 
 		/*
@@ -330,7 +330,7 @@ final class An_Whatever_Helpers {
 				'publicly_queryable'  => true,
 				'show_ui'             => true,
 				'show_in_menu'        => true,
-				'show_in_nav_menus'   => false,
+				'show_in_nav_menus'   => true,
 				'show_in_rest'        => true,
 				'menu_icon'           => 'dashicons-welcome-learn-more',
 				'supports'            => array(
