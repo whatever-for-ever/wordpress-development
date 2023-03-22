@@ -5,6 +5,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -26,7 +27,9 @@ export default function Edit( props ) {
 
 	const { accordionID } = attributes;
 
-	setAttributes( { accordionID: clientId } );
+	useEffect( () => {
+		setAttributes( { accordionID: clientId } );
+	}, [] );
 
 	const ALLOWED_BLOCKS = [ 'an-whatever/accordion-item' ];
 

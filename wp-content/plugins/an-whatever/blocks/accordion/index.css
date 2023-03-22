@@ -1,1 +1,20 @@
-.wp-block-an-whatever-accordion{background-color:#f0f0f0;padding:1rem}.wp-block-an-whatever-accordion .accordion-panel>.block-editor-inner-blocks>.block-editor-block-list__layout,.wp-block-an-whatever-accordion>.block-editor-inner-blocks>.block-editor-block-list__layout{padding-bottom:1rem}
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./_src/blocks/accordion/editor.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-an-whatever-accordion {
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+.wp-block-an-whatever-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  padding-bottom: 1rem;
+}
+.wp-block-an-whatever-accordion .accordion-panel > .block-editor-inner-blocks > .block-editor-block-list__layout {
+  padding-bottom: 1rem;
+}
+
+/*# sourceMappingURL=index.css.map*/

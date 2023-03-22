@@ -5,6 +5,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -26,7 +27,9 @@ export default function Edit( props ) {
 
 	const { title, accordionItemID } = attributes;
 
-	setAttributes( { accordionItemID: clientId } );
+	useEffect( () => {
+		setAttributes( { accordionItemID: clientId } );
+	}, [] );
 
 	const ALLOWED_BLOCKS = [
 		'core/heading',
@@ -59,7 +62,7 @@ export default function Edit( props ) {
 					<button
 						type="button"
 						aria-expanded="true"
-						class="accordion-trigger"
+						className="accordion-trigger"
 						aria-controls={ `acc-item-content-${ accordionItemID }` }
 						id={ `acc-item-btn-${ accordionItemID }` }
 					>
@@ -82,7 +85,7 @@ export default function Edit( props ) {
 				id={ `acc-item-content-${ accordionItemID }` }
 				role="region"
 				aria-labelledby={ `acc-item-btn-${ accordionItemID }` }
-				class="accordion-panel"
+				className="accordion-panel"
 			>
 				<InnerBlocks
 					templateLock={ false }
