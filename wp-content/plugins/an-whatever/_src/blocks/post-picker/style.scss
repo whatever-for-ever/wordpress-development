@@ -5,6 +5,104 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+// Clearfix
+@mixin clearfix() {
+	content: "";
+	display: table;
+	table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+@mixin clearfix-full() {
+	&::before,
+	&::after {
+		@include clearfix();
+	}
+
+	&::after {
+		@include clearfix-after();
+	}
+}
+
 .wp-block-an-whatever-post-picker {
 	padding: 2px;
+
+	.accordion-item {
+		border: 1px solid #a7a7a7;
+
+		> h3 {
+			margin: 0;
+		}
+
+		.accordion-panel {
+			padding: 1rem;
+
+			@include clearfix-full();
+
+			.alignleft {
+				margin-right: 1.5rem;
+			}
+
+			.wp-block-an-whatever-accordion:not(:last-of-type) {
+				margin-bottom: 1.5rem;
+			}
+		}
+	}
+
+	button.accordion-trigger {
+		position: relative;
+
+		border-radius: 0;
+		border: none;
+		outline: 1px solid var(--wp--preset--color--base, "#fff");
+
+		display: block;
+		width: 100%;
+
+		padding: 0.5rem 2.5rem 0.5rem 1rem;
+
+		background-color: var(--wp--preset--color--contrast, "#000");
+		color: var(--wp--preset--color--base, "#fff");
+
+		font-family: var(
+			--wp--preset--font-family--eagle-lake,
+			'"URW Chancery L", "Comic Sans MS", "Monotype Corsiva", cursive'
+		);
+		font-size: 1.25rem;
+		text-align: left;
+
+		cursor: pointer;
+
+		&::after {
+			content: "▹";
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			width: 2rem;
+			height: 100%;
+
+			position: absolute;
+			right: 0.5rem;
+			top: 0;
+			bottom: 0;
+
+			transform: rotate(90deg);
+			transition: transform 0.2s ease-in-out;
+		}
+
+		&[aria-expanded="true"] {
+			&::after {
+				transform: rotate(-90deg);
+			}
+		}
+
+		&:focus {
+			outline: 3px dashed var(--wp--preset--color--contrast, "#000");
+		}
+	}
 }

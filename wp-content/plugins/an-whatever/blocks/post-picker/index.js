@@ -284,7 +284,7 @@ module.exports = window["wp"]["i18n"];
   \********************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"an-whatever/post-picker","version":"1.0.0","title":"Post Picker","category":"widgets","icon":"color-picker","description":"Post Picker block.","supports":{"html":false},"attributes":{"postListId":{"type":"string","default":""},"postList":{"type":"array"}},"textdomain":"post-picker","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"an-whatever/post-picker","version":"1.0.0","title":"Post Picker","category":"widgets","icon":"color-picker","description":"Post Picker block.","supports":{"html":false},"attributes":{"postListId":{"type":"string","default":""},"postList":{"type":"array"}},"textdomain":"post-picker","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ })
 
