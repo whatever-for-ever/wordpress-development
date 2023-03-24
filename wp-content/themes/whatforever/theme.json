@@ -9,7 +9,7 @@
 					"slug": "base"
 				},
 				{
-					"color": "#000000",
+					"color": "rgb(33,37,43)",
 					"name": "Contrast",
 					"slug": "contrast"
 				},
@@ -70,14 +70,7 @@
 					"slug": "80"
 				}
 			],
-			"units": [
-				"%",
-				"px",
-				"em",
-				"rem",
-				"vh",
-				"vw"
-			]
+			"units": ["%", "px", "em", "rem", "vh", "vw"]
 		},
 		"typography": {
 			"dropCap": false,
@@ -94,17 +87,13 @@
 							"fontFamily": "Mali ExtraLight",
 							"fontStyle": "normal",
 							"fontWeight": "275",
-							"src": [
-								"file:./assets/fonts/mali-extralight_normal_275.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-extralight_normal_275.woff2"]
 						},
 						{
 							"fontFamily": "Mali ExtraLight",
 							"fontStyle": "italic",
 							"fontWeight": "275",
-							"src": [
-								"file:./assets/fonts/mali-extralight_italic_275.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-extralight_italic_275.woff2"]
 						}
 					],
 					"fontFamily": "Mali ExtraLight",
@@ -116,17 +105,13 @@
 							"fontFamily": "Mali Light",
 							"fontStyle": "normal",
 							"fontWeight": "300",
-							"src": [
-								"file:./assets/fonts/mali-light_normal_300.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-light_normal_300.woff2"]
 						},
 						{
 							"fontFamily": "Mali Light",
 							"fontStyle": "italic",
 							"fontWeight": "300",
-							"src": [
-								"file:./assets/fonts/mali-light_italic_300.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-light_italic_300.woff2"]
 						}
 					],
 					"fontFamily": "Mali Light",
@@ -138,17 +123,13 @@
 							"fontFamily": "Mali",
 							"fontStyle": "italic",
 							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/mali_italic_400.woff2"
-							]
+							"src": ["file:./assets/fonts/mali_italic_400.woff2"]
 						},
 						{
 							"fontFamily": "Mali",
 							"fontStyle": "normal",
 							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/mali_normal_400.woff2"
-							]
+							"src": ["file:./assets/fonts/mali_normal_400.woff2"]
 						}
 					],
 					"fontFamily": "Mali",
@@ -160,17 +141,13 @@
 							"fontFamily": "Mali Medium",
 							"fontStyle": "normal",
 							"fontWeight": "500",
-							"src": [
-								"file:./assets/fonts/mali-medium_normal_500.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-medium_normal_500.woff2"]
 						},
 						{
 							"fontFamily": "Mali Medium",
 							"fontStyle": "italic",
 							"fontWeight": "500",
-							"src": [
-								"file:./assets/fonts/mali-medium_italic_500.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-medium_italic_500.woff2"]
 						}
 					],
 					"fontFamily": "Mali Medium",
@@ -182,17 +159,13 @@
 							"fontFamily": "Mali SemiBold",
 							"fontStyle": "normal",
 							"fontWeight": "600",
-							"src": [
-								"file:./assets/fonts/mali-semibold_normal_600.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-semibold_normal_600.woff2"]
 						},
 						{
 							"fontFamily": "Mali SemiBold",
 							"fontStyle": "italic",
 							"fontWeight": "600",
-							"src": [
-								"file:./assets/fonts/mali-semibold_italic_600.woff2"
-							]
+							"src": ["file:./assets/fonts/mali-semibold_italic_600.woff2"]
 						}
 					],
 					"fontFamily": "Mali SemiBold",
@@ -204,17 +177,13 @@
 							"fontFamily": "Mali",
 							"fontStyle": "normal",
 							"fontWeight": "700",
-							"src": [
-								"file:./assets/fonts/mali_normal_700.woff2"
-							]
+							"src": ["file:./assets/fonts/mali_normal_700.woff2"]
 						},
 						{
 							"fontFamily": "Mali",
 							"fontStyle": "italic",
 							"fontWeight": "700",
-							"src": [
-								"file:./assets/fonts/mali_italic_700.woff2"
-							]
+							"src": ["file:./assets/fonts/mali_italic_700.woff2"]
 						}
 					],
 					"fontFamily": "Mali Bold",
@@ -226,9 +195,7 @@
 							"fontFamily": "Eagle Lake",
 							"fontStyle": "normal",
 							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/eagle-lake_normal_400.woff2"
-							]
+							"src": ["file:./assets/fonts/eagle-lake_normal_400.woff2"]
 						}
 					],
 					"fontFamily": "Eagle Lake",
