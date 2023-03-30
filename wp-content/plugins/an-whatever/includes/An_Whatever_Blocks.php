@@ -46,13 +46,17 @@ class An_Whatever_Blocks {
 	 */
 	public function action_register_block_types() {
 		// @link https://youtu.be/ZjYgdf6RKPU
-		register_block_type( $this->helpers::get_file_path( '/blocks/accordion/' ) );
+		\register_block_type( $this->helpers::get_file_path( '/blocks/accordion/' ) );
 
 		// @link https://youtu.be/ZjYgdf6RKPU
-		register_block_type( $this->helpers::get_file_path( '/blocks/accordion-item/' ) );
+		\register_block_type( $this->helpers::get_file_path( '/blocks/accordion-item/' ) );
 
 		// @link https://youtu.be/fW3W1eZorHg?t=2561
-		register_block_type( $this->helpers::get_file_path( '/blocks/post-picker/' ) );
+		// @link https://www.twitch.tv/videos/1773289338?t=1h10m53s
+		\register_block_type( $this->helpers::get_file_path( '/blocks/post-picker/' ) );
+
+		// @link https://www.twitch.tv/videos/1773289338?t=1h10m53s
+		\register_block_type( $this->helpers::get_file_path( '/blocks/post-picker-placeholder/' ) );
 	}
 
 }
