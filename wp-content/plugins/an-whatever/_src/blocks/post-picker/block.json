@@ -19,7 +19,7 @@
 			"type": "array"
 		}
 	},
-	"textdomain": "post-picker",
+	"textdomain": "an-whatever",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
