@@ -55,6 +55,7 @@ vendor/**/*
 !/_src/blocks/accordion
 !/_src/blocks/accordion-item
 !/_src/blocks/post-picker
+!/_src/blocks/post-picker-placeholder
 
 !/blocks/
 /blocks/*
@@ -62,4 +63,5 @@ vendor/**/*
 !/blocks/accordion
 !/blocks/accordion-item
 !/blocks/post-picker
+!/blocks/post-picker-placeholder
 

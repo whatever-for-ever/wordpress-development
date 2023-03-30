@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "an-whatever/post-picker-placeholder",
+  "version": "1.0.0",
+  "title": "Post Picker Placeholder",
+  "category": "widgets",
+  "icon": "color-picker",
+  "description": "Represents content in the block editor.",
+  "parent": [
+    "an-whatever/post-picker"
+  ],
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "id": {
+      "type": "number",
+      "default": 0
+    },
+    "postType": {
+      "type": "string",
+      "default": ""
+    },
+    "placeholderId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "an-whatever",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}
