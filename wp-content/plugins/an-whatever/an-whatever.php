@@ -44,16 +44,6 @@ if ( ! defined( '\WPINC' ) ) {
 	die( 'Action denied.' );
 }
 
-/**
- * Load text domain.
- *
- * @since 1.0.0
- */
-function load_plugin_textdomain() {
-	\load_plugin_textdomain( 'an-whatever', false, \basename( \dirname( __FILE__ ) ) . '/languages/' );
-}
-\add_action( 'plugins_loaded', 'load_plugin_textdomain' );
-
 // Require file with defined plugin constants.
 require_once \plugin_dir_path( __FILE__ ) . 'an-whatever-constants.php';
 

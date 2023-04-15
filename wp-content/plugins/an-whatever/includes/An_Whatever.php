@@ -103,16 +103,6 @@ final class An_Whatever {
 	public function __construct() {
 		// Manualy load only if not using autoloader.
 		$this->load_dependencies();
-
-		$this->helpers = \An_Whatever\An_Whatever_Helpers::get_instance();
-
-		$this->version = $this->helpers::get_version();
-
-		$this->plugin_name   = $this->helpers::get_plugin_name();
-		$this->plugin_prefix = $this->helpers::get_plugin_prefix();
-
-		$this->ctx_args = $this->helpers::get_ctx_args();
-		$this->cpt_args = $this->helpers::get_cpt_args();
 	}
 
 	/**
@@ -157,6 +147,26 @@ final class An_Whatever {
 		$plugin_i18n = new \An_Whatever\An_Whatever_i18n();
 
 		\add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
+	}
+
+	/**
+	 * Variables in this class are set.
+	 *
+	 * Variables are initialized with plugins_loaded action hook.
+	 * Variables must be initialized after loading textdomain is done.
+	 *
+	 * @return void
+	 */
+	public function setup_class_vars(): void {
+		$this->helpers = \An_Whatever\An_Whatever_Helpers::get_instance();
+
+		$this->version = $this->helpers::get_version();
+
+		$this->plugin_name   = $this->helpers::get_plugin_name();
+		$this->plugin_prefix = $this->helpers::get_plugin_prefix();
+
+		$this->ctx_args = $this->helpers::get_ctx_args();
+		$this->cpt_args = $this->helpers::get_cpt_args();
 	}
 
 	/**
@@ -208,6 +218,10 @@ final class An_Whatever {
 	 */
 	public function run() {
 		$this->set_locale();
+
+		// Variables must be initialized after the loaded textdomain.
+		\add_action( 'plugins_loaded', array( $this, 'setup_class_vars' ) );
+
 		$this->define_shared_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
