@@ -103,6 +103,10 @@ final class An_Whatever {
 	public function __construct() {
 		// Manualy load only if not using autoloader.
 		$this->load_dependencies();
+
+		// Variables must be initialized after the loaded textdomain.
+		// The text domain is loaded using the plugins_loaded action hook with -1 priority.
+		\add_action( 'plugins_loaded', array( $this, 'setup_class_vars' ), 0 );
 	}
 
 	/**
@@ -146,7 +150,8 @@ final class An_Whatever {
 	private function set_locale() {
 		$plugin_i18n = new \An_Whatever\An_Whatever_i18n();
 
-		\add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
+		// The text domain must be loaded before any other action is taken.
+		\add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ), -1 );
 	}
 
 	/**
@@ -218,10 +223,6 @@ final class An_Whatever {
 	 */
 	public function run() {
 		$this->set_locale();
-
-		// Variables must be initialized after the loaded textdomain.
-		\add_action( 'plugins_loaded', array( $this, 'setup_class_vars' ) );
-
 		$this->define_shared_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
