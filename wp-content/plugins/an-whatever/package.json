@@ -19,6 +19,6 @@
 		"check-licenses": "wp-scripts check-licenses"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.0.0"
+		"@wordpress/scripts": "^26.15.0"
 	}
 }
